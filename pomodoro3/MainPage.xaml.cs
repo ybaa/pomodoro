@@ -27,8 +27,11 @@ namespace pomodoro3
         int currentMinute = 24;
         int barCounter = 0;
         bool work = true;
+        int maxValueOfBarForBreak = 295;
+        int maxValueOfBarForWork = 1474;
 
-        
+        List<String> categories = new List<string>();
+         
         public MainPage()
         {
             this.InitializeComponent();
@@ -38,7 +41,10 @@ namespace pomodoro3
 
             myTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             myTimer.Tick += MyTimer_Tick;
-            
+
+            categories.Add("+");
+
+            categoryBox.Items.Add(categories[0]);
         }
 
         private void MyTimer_Tick(object sender, object e) {
@@ -63,11 +69,28 @@ namespace pomodoro3
             myProgressBar.Value++;
             myProgressBar_Copy.Value++;
             barCounter++;
-            if (barCounter >= 1500) {
-                barCounter = 0;
-                myProgressBar.Value = 0;
-                myProgressBar_Copy.Value = 0;
+
+            if (work) {
+                if (barCounter >= maxValueOfBarForWork)
+                    setItAfterTheEndOfCounting(false);
             }
+            else {
+                if(barCounter >= maxValueOfBarForBreak) 
+                    setItAfterTheEndOfCounting(true);
+                
+            }
+
+            //if (barCounter >= 1500) {
+            //    barCounter = 0;
+            //    myProgressBar.Value = 0;
+            //    myProgressBar_Copy.Value = 0;
+            //    playImg.Visibility = Visibility.Collapsed;
+            //    pauseImg.Visibility = Visibility.Visible;
+            //    if (work == true)
+            //        work = false;
+            //    else
+            //        work = true;
+            //}
 
         }
 
@@ -82,7 +105,12 @@ namespace pomodoro3
             playImg.Visibility = Visibility.Collapsed;
             pauseImg.Visibility = Visibility.Visible;
             myTimer.Start();
-            motivationText.Text = "Stay focused!";
+
+            if (work == true)
+                motivationText.Text = "Stay focused!";
+            else
+                motivationText.Text = "Relax";
+
             motivationText.Visibility = Visibility.Visible;
             
             
@@ -92,7 +120,11 @@ namespace pomodoro3
             playImg.Visibility = Visibility.Visible;
             pauseImg.Visibility = Visibility.Collapsed;
             myTimer.Stop();
-            motivationText.Text = "Ohh really? It's just 25min ";
+
+            if (work == true)
+                motivationText.Text = "Ohh really? It's just 25min ";
+            else
+                motivationText.Text = "Don't lenghten the break!";
             
            
         }
@@ -100,28 +132,37 @@ namespace pomodoro3
         private void button_Click(object sender, RoutedEventArgs e) {
             myTimer.Stop();
             if (work == true) {
-                currentMinute = 4;
-                currentSecond = 60;
-                motivationText.Text = "It's time to break!";
-                timeToEnd.Text = "5:00";
-                work = false;
-                playImg.Visibility = Visibility.Visible;
-                pauseImg.Visibility = Visibility.Collapsed;
-                myProgressBar.Value = 0;
-                myProgressBar_Copy.Value = 0; 
+                setItAfterSkipIsPressed(4, 60, "It's time to break!", false, "5:00", maxValueOfBarForBreak);
+ 
 
             }
             else {
-                currentMinute = 24;
-                currentSecond = 60;
-                motivationText.Text = "One pomodoro more?";
-                timeToEnd.Text = "25:00";
-                work = true;
-                playImg.Visibility = Visibility.Visible;
-                pauseImg.Visibility = Visibility.Collapsed;
-                myProgressBar.Value = 0;
-                myProgressBar_Copy.Value = 0;
+                setItAfterSkipIsPressed(24, 60, "One pomodoro more?", true, "25:00", maxValueOfBarForWork);
             }
+        }
+
+
+        private void setItAfterSkipIsPressed(int min, int sec, String motivationTextLocal, bool workStatus, String timeToShow, int maxValueOfBar) {
+            currentMinute = min;
+            currentSecond = sec;
+            motivationText.Text = motivationTextLocal;
+            work = workStatus;
+            timeToEnd.Text = timeToShow;
+            myProgressBar.Maximum = maxValueOfBar;
+            myProgressBar_Copy.Maximum = maxValueOfBar;
+            playImg.Visibility = Visibility.Visible;
+            pauseImg.Visibility = Visibility.Collapsed;
+            myProgressBar.Value = 0;
+            myProgressBar_Copy.Value = 0;
+
+        }
+        private void setItAfterTheEndOfCounting(bool workStatus) {
+            barCounter = 0;
+            myProgressBar.Value = 0;
+            myProgressBar_Copy.Value = 0;
+            playImg.Visibility = Visibility.Collapsed;
+            pauseImg.Visibility = Visibility.Visible;
+            work = workStatus;
         }
     }
 }

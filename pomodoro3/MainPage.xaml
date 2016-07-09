@@ -34,7 +34,7 @@
                Source="Assets/pause.png" Visibility="Collapsed" Tapped="pauseImg_Tapped"/>
         <ProgressBar x:Name="myProgressBar"
                      HorizontalAlignment="Center"
-                     Height="5" Margin="0,110,0,0"
+                     Height="5" Margin="0,120,0,0"
                      VerticalAlignment="Top" Maximum="1500" Foreground="#FF51CB18" Width="350"
                      >
             <ProgressBar.Background>
@@ -51,9 +51,29 @@
                 <SolidColorBrush Color="#FF262626" Opacity="0.15999999642372131"/>
             </ProgressBar.Background>
         </ProgressBar>
-        <TextBlock x:Name="motivationText" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="Stay focused!" VerticalAlignment="Top" FontSize="30" Visibility="Collapsed"/>
-        <Button x:Name="categoryButton" Content="Choose category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="37" Width="121" FontSize="12"/>
-        <Button x:Name="button" Content="Skip" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" FontSize="12" Click="button_Click" />
+        <TextBlock x:Name="motivationText"
+                   HorizontalAlignment="Center" 
+                   Margin="0,80,0,0"
+                   TextWrapping="Wrap"
+                   Text="Stay focused!" 
+                   VerticalAlignment="Top" 
+                   FontSize="30" 
+                   Visibility="Collapsed"/>
+        <Button x:Name="skipButton" 
+                Content="Skip" 
+                HorizontalAlignment="Right" 
+                Margin="0,10,10,0"
+                VerticalAlignment="Top"
+                FontSize="12" 
+                Click="button_Click" />
+        <ComboBox x:Name="categoryBox" 
+                  HorizontalAlignment="Left"
+                  Margin="10,10,0,0" 
+                  VerticalAlignment="Top"
+                  Width="120"
+                  FontSize="14" 
+                  PlaceholderText="category"
+                  />
 
     </Grid>
 </Page>
