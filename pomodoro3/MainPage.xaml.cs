@@ -25,7 +25,10 @@ namespace pomodoro3
         
         int currentSecond = 60;
         int currentMinute = 24;
+        int barCounter = 0;
+        bool work = true;
 
+        
         public MainPage()
         {
             this.InitializeComponent();
@@ -35,6 +38,7 @@ namespace pomodoro3
 
             myTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             myTimer.Tick += MyTimer_Tick;
+            
         }
 
         private void MyTimer_Tick(object sender, object e) {
@@ -55,6 +59,16 @@ namespace pomodoro3
                 timeToEnd.Text = currentMinute.ToString() + ":0" + currentSecond.ToString();
             else
                 timeToEnd.Text = currentMinute.ToString() +":"+ currentSecond.ToString();
+
+            myProgressBar.Value++;
+            myProgressBar_Copy.Value++;
+            barCounter++;
+            if (barCounter >= 1500) {
+                barCounter = 0;
+                myProgressBar.Value = 0;
+                myProgressBar_Copy.Value = 0;
+            }
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -68,12 +82,46 @@ namespace pomodoro3
             playImg.Visibility = Visibility.Collapsed;
             pauseImg.Visibility = Visibility.Visible;
             myTimer.Start();
+            motivationText.Text = "Stay focused!";
+            motivationText.Visibility = Visibility.Visible;
+            
+            
         }
 
         private void pauseImg_Tapped(object sender, TappedRoutedEventArgs e) {
             playImg.Visibility = Visibility.Visible;
             pauseImg.Visibility = Visibility.Collapsed;
             myTimer.Stop();
+            motivationText.Text = "Ohh really? It's just 25min ";
+            
+           
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e) {
+            myTimer.Stop();
+            if (work == true) {
+                currentMinute = 4;
+                currentSecond = 60;
+                motivationText.Text = "It's time to break!";
+                timeToEnd.Text = "5:00";
+                work = false;
+                playImg.Visibility = Visibility.Visible;
+                pauseImg.Visibility = Visibility.Collapsed;
+                myProgressBar.Value = 0;
+                myProgressBar_Copy.Value = 0; 
+
+            }
+            else {
+                currentMinute = 24;
+                currentSecond = 60;
+                motivationText.Text = "One pomodoro more?";
+                timeToEnd.Text = "25:00";
+                work = true;
+                playImg.Visibility = Visibility.Visible;
+                pauseImg.Visibility = Visibility.Collapsed;
+                myProgressBar.Value = 0;
+                myProgressBar_Copy.Value = 0;
+            }
         }
     }
 }

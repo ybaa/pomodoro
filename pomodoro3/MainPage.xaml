@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="#FFB04848">
+    <Grid Background="#FFD34747">
         <TextBlock x:Name="timeToEnd" 
                    HorizontalAlignment="Center"
                    Margin="0,160,0,0" 
@@ -16,15 +16,8 @@
                    Text="25:00" 
                    VerticalAlignment="Top" 
                    FontSize="86" 
-                   FontFamily="Lato Light" 
+                   FontFamily="DengXian" 
                    RenderTransformOrigin="0.5,0.5"/>
-        <ProgressRing x:Name="progressRing" 
-                      HorizontalAlignment="Left" 
-                      Margin="95,113,0,0" 
-                      VerticalAlignment="Top" 
-                      Background="#FF191717" 
-                      Height="211" 
-                      Width="211"/>
         <Image x:Name="playImg" 
                HorizontalAlignment="Center" 
                Height="100" 
@@ -39,6 +32,28 @@
                VerticalAlignment="Top"
                Width="100"
                Source="Assets/pause.png" Visibility="Collapsed" Tapped="pauseImg_Tapped"/>
+        <ProgressBar x:Name="myProgressBar"
+                     HorizontalAlignment="Center"
+                     Height="5" Margin="0,110,0,0"
+                     VerticalAlignment="Top" Maximum="1500" Foreground="#FF51CB18" Width="350"
+                     >
+            <ProgressBar.Background>
+                <SolidColorBrush Color="#FF262626" Opacity="0.15999999642372131"/>
+            </ProgressBar.Background>
+        </ProgressBar>
+        <TextBlock x:Name="pomodoroTextBlock" HorizontalAlignment="Center" Margin="0,25,0,0" TextWrapping="Wrap" Text="Pomodoro" VerticalAlignment="Top" FontSize="20"/>
+        <ProgressBar x:Name="myProgressBar_Copy"
+        	HorizontalAlignment="Center"
+        	Height="5" Margin="25,300,25,0"
+        	VerticalAlignment="Top" Maximum="1500" Foreground="#FF51CB18" Width="350"
+                     >
+            <ProgressBar.Background>
+                <SolidColorBrush Color="#FF262626" Opacity="0.15999999642372131"/>
+            </ProgressBar.Background>
+        </ProgressBar>
+        <TextBlock x:Name="motivationText" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="Stay focused!" VerticalAlignment="Top" FontSize="30" Visibility="Collapsed"/>
+        <Button x:Name="categoryButton" Content="Choose category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="37" Width="121" FontSize="12"/>
+        <Button x:Name="button" Content="Skip" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" FontSize="12" Click="button_Click" />
 
     </Grid>
 </Page>
