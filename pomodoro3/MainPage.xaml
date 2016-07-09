@@ -72,7 +72,8 @@
                   VerticalAlignment="Top"
                   Width="120"
                   FontSize="14" 
-                  PlaceholderText="category"
+                  PlaceholderText="category" SelectionChanged="categoryBox_SelectionChanged" 
+                  
                   />
 
     </Grid>

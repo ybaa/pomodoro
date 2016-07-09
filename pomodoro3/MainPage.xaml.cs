@@ -26,7 +26,7 @@ namespace pomodoro3
         int currentSecond = 60;
         int currentMinute = 24;
         int barCounter = 0;
-        bool work = true;
+        bool work = true;           //to check is it is break or work now
         int maxValueOfBarForBreak = 295;
         int maxValueOfBarForWork = 1474;
 
@@ -39,29 +39,29 @@ namespace pomodoro3
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
 
-            myTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            myTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);         //count seconds
             myTimer.Tick += MyTimer_Tick;
 
-            categories.Add("+");
-
-            categoryBox.Items.Add(categories[0]);
+         
         }
 
         private void MyTimer_Tick(object sender, object e) {
             
             currentSecond--.ToString();
-            if(currentSecond == 0) {
+            if(currentSecond == 0) {            //end of cycle
                 if (currentMinute == 0) {
                     myTimer.Stop();
-                    currentMinute = 25;
-                    currentSecond = 00;
+                    if (work) 
+                        endCountdown(5, 1, false);
+                    else 
+                        endCountdown(25, 1, true);
                 }
 
                 currentMinute--;
                 currentSecond = 59;
             }
 
-            if (currentSecond < 10) 
+            if (currentSecond < 10)         //display
                 timeToEnd.Text = currentMinute.ToString() + ":0" + currentSecond.ToString();
             else
                 timeToEnd.Text = currentMinute.ToString() +":"+ currentSecond.ToString();
@@ -80,17 +80,6 @@ namespace pomodoro3
                 
             }
 
-            //if (barCounter >= 1500) {
-            //    barCounter = 0;
-            //    myProgressBar.Value = 0;
-            //    myProgressBar_Copy.Value = 0;
-            //    playImg.Visibility = Visibility.Collapsed;
-            //    pauseImg.Visibility = Visibility.Visible;
-            //    if (work == true)
-            //        work = false;
-            //    else
-            //        work = true;
-            //}
 
         }
 
@@ -163,6 +152,19 @@ namespace pomodoro3
             playImg.Visibility = Visibility.Collapsed;
             pauseImg.Visibility = Visibility.Visible;
             work = workStatus;
+        }
+        private void endCountdown(int min, int sec, bool workStatus) {
+          
+            currentMinute = min;
+            currentSecond = sec;
+            work = workStatus;
+            myProgressBar.Value = 0;
+            myProgressBar_Copy.Value = 0;
+
+        }
+
+        private void categoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
         }
     }
 }
