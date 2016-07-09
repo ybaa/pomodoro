@@ -42,7 +42,8 @@ namespace pomodoro3
             myTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);         //count seconds
             myTimer.Tick += MyTimer_Tick;
 
-         
+
+
         }
 
         private void MyTimer_Tick(object sender, object e) {
@@ -165,6 +166,28 @@ namespace pomodoro3
 
         private void categoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
+        }
+
+        private void button_Click_1(object sender, RoutedEventArgs e) {
+
+            if (addCategoryButton.Content.ToString() != "Click to accept") {
+                newCategoryTextBox.Visibility = Visibility.Visible;
+                addCategoryButton.Content = "Click to accept";
+            }
+            else {
+                addCategoryButton.Content = "Add category";
+                categories.Add(newCategoryTextBox.Text.ToString());
+
+                categoryBox.Items.Add(categories[categories.Count-1]);
+                newCategoryTextBox.Visibility = Visibility.Collapsed;
+               
+            }
+
+
+        }
+
+        private void newCategoryTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+          
         }
     }
 }

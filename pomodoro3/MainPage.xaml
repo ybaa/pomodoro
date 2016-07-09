@@ -41,7 +41,7 @@
                 <SolidColorBrush Color="#FF262626" Opacity="0.15999999642372131"/>
             </ProgressBar.Background>
         </ProgressBar>
-        <TextBlock x:Name="pomodoroTextBlock" HorizontalAlignment="Center" Margin="0,25,0,0" TextWrapping="Wrap" Text="Pomodoro" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock x:Name="pomodoroTextBlock" HorizontalAlignment="Left" Margin="25,28,274,0" TextWrapping="Wrap" Text="Pomodoro" VerticalAlignment="Top" FontSize="20"/>
         <ProgressBar x:Name="myProgressBar_Copy"
         	HorizontalAlignment="Center"
         	Height="5" Margin="25,300,25,0"
@@ -62,19 +62,21 @@
         <Button x:Name="skipButton" 
                 Content="Skip" 
                 HorizontalAlignment="Right" 
-                Margin="0,10,10,0"
+                Margin="0,10,25,0"
                 VerticalAlignment="Top"
-                FontSize="12" 
-                Click="button_Click" />
+                FontSize="16" 
+                Click="button_Click" BorderBrush="White" />
         <ComboBox x:Name="categoryBox" 
                   HorizontalAlignment="Left"
-                  Margin="10,10,0,0" 
+                  Margin="25,320,0,0" 
                   VerticalAlignment="Top"
-                  Width="120"
+                  Width="200"
                   FontSize="14" 
-                  PlaceholderText="category" SelectionChanged="categoryBox_SelectionChanged" 
+                  PlaceholderText="category" SelectionChanged="categoryBox_SelectionChanged" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" 
                   
                   />
+        <Button x:Name="addCategoryButton" Content="Add category" HorizontalAlignment="Right" Margin="0,320,20,0" VerticalAlignment="Top" BorderBrush="{x:Null}" FontSize="16" Click="button_Click_1"/>
+        <TextBox x:Name="newCategoryTextBox" HorizontalAlignment="Center" Margin="24,130,29,0" TextWrapping="Wrap" Text="Enter category" VerticalAlignment="Top" Width="347" TextChanged="newCategoryTextBox_TextChanged" Visibility="Collapsed"/>
 
     </Grid>
 </Page>
