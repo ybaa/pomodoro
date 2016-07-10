@@ -27,8 +27,10 @@ namespace pomodoro3
         int currentMinute = 24;
         int barCounter = 0;
         bool work = true;           //to check is it is break or work now
-        int maxValueOfBarForBreak = 295;
+        int maxValueOfBarForBreak = 297;        //length of progress bar
         int maxValueOfBarForWork = 1474;
+        int maxValueOfBarForLongBreak = 890;
+        int pomodoroCounter = 1;
 
         List<String> categories = new List<string>();
          
@@ -47,19 +49,26 @@ namespace pomodoro3
         }
 
         private void MyTimer_Tick(object sender, object e) {
-            
-            currentSecond--.ToString();
+
+            currentSecond--;//.ToString();
             if(currentSecond == 0) {            //end of cycle
                 if (currentMinute == 0) {
                     myTimer.Stop();
-                    if (work) 
-                        endCountdown(5, 1, false);
-                    else 
-                        endCountdown(25, 1, true);
-                }
 
-                currentMinute--;
-                currentSecond = 59;
+                    if (work)
+                        //endCountdown(5, 0, false);
+                        endCountdown(25, 0, true);
+                    else {
+                        if (pomodoroCounter % 4 == 0 +1 && pomodoroCounter != 1)
+                            endCountdown(15, 0, false);
+                        else
+                            endCountdown(5, 0, false);
+                    }
+                }
+                else {
+                    currentMinute--;
+                    currentSecond = 59;
+                }
             }
 
             if (currentSecond < 10)         //display
@@ -72,8 +81,11 @@ namespace pomodoro3
             barCounter++;
 
             if (work) {
-                if (barCounter >= maxValueOfBarForWork)
+                if (barCounter >= maxValueOfBarForWork) {
                     setItAfterTheEndOfCounting(false);
+                    pomodoroCounter++;
+                    pomodoroTodayNumber.Text = pomodoroCounter.ToString();
+                }
             }
             else {
                 if(barCounter >= maxValueOfBarForBreak) 
@@ -122,8 +134,16 @@ namespace pomodoro3
         private void button_Click(object sender, RoutedEventArgs e) {
             myTimer.Stop();
             if (work == true) {
-                setItAfterSkipIsPressed(4, 60, "It's time to break!", false, "5:00", maxValueOfBarForBreak);
- 
+                if (pomodoroCounter % 4 != 0 +1 || pomodoroCounter == 1) {
+                    setItAfterSkipIsPressed(4, 60, "It's time to break!", false, "5:00", maxValueOfBarForBreak);
+                   
+                    pomodoroTodayNumber.Text = pomodoroCounter.ToString();
+                }
+                else {
+                    setItAfterSkipIsPressed(14, 60, "It's time to long break!", false, "15:00", maxValueOfBarForLongBreak);
+                    pomodoroTodayNumber.Text = pomodoroCounter.ToString();
+                }
+                pomodoroCounter++;
 
             }
             else {
@@ -150,8 +170,8 @@ namespace pomodoro3
             barCounter = 0;
             myProgressBar.Value = 0;
             myProgressBar_Copy.Value = 0;
-            playImg.Visibility = Visibility.Collapsed;
-            pauseImg.Visibility = Visibility.Visible;
+           // playImg.Visibility = Visibility.Collapsed;
+           // pauseImg.Visibility = Visibility.Visible;
             work = workStatus;
         }
         private void endCountdown(int min, int sec, bool workStatus) {
@@ -159,9 +179,11 @@ namespace pomodoro3
             currentMinute = min;
             currentSecond = sec;
             work = workStatus;
-            myProgressBar.Value = 0;
-            myProgressBar_Copy.Value = 0;
-
+            //myProgressBar.Value = 0;
+            //myProgressBar_Copy.Value = 0;
+            playImg.Visibility = Visibility.Visible;
+            pauseImg.Visibility = Visibility.Collapsed;
+            timeToEnd.Text = currentMinute.ToString() + ":0" + currentSecond.ToString();
         }
 
         private void categoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {

@@ -71,12 +71,15 @@
                   Margin="25,320,0,0" 
                   VerticalAlignment="Top"
                   Width="200"
-                  FontSize="14" 
+                  FontSize="16" 
                   PlaceholderText="category" SelectionChanged="categoryBox_SelectionChanged" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" 
                   
                   />
         <Button x:Name="addCategoryButton" Content="Add category" HorizontalAlignment="Right" Margin="0,320,20,0" VerticalAlignment="Top" BorderBrush="{x:Null}" FontSize="16" Click="button_Click_1"/>
         <TextBox x:Name="newCategoryTextBox" HorizontalAlignment="Center" Margin="24,130,29,0" TextWrapping="Wrap" Text="Enter category" VerticalAlignment="Top" Width="347" TextChanged="newCategoryTextBox_TextChanged" Visibility="Collapsed"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="55,567,275,0" TextWrapping="Wrap" Text="It's your" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Center" Margin="145.202,567,0,0" TextWrapping="Wrap" Text="pomodoro today!" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock x:Name="pomodoroTodayNumber" HorizontalAlignment="Center" Margin="151,560,213,44" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="30" Foreground="#FF262626" Width="36"/>
 
     </Grid>
 </Page>
