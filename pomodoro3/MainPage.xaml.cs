@@ -1,39 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
-namespace pomodoro3
-{
- 
+namespace pomodoro3 {
+
     public sealed partial class MainPage : Page
     {
 
-        DispatcherTimer myTimer = new DispatcherTimer();
-        
-        int currentSecond = 60;
-        int currentMinute = 24;
-        int barCounter = 0;
-        bool work = true;           //to check is it is break or work now
-        int maxValueOfBarForBreak = 297;        //length of progress bar
-        int maxValueOfBarForWork = 1474;
-        int maxValueOfBarForLongBreak = 890;
-        int pomodoroCounter = 1;
+        private DispatcherTimer myTimer = new DispatcherTimer();
+               
+        private int currentSecond = 60;
+        private int currentMinute = 24;
+        private int barCounter = 0;
+        private bool work = true;           //to check is it is break or work now
+        private int maxValueOfBarForBreak = 297;        //length of progress bar
+        private int maxValueOfBarForWork = 1474;
+        private int maxValueOfBarForLongBreak = 890;
+        private int pomodoroCounter = 1;
 
-        List<String> categories = new List<string>();
-         
+        private List<String> categories = new List<string>();
+
+        //MediaPlayer player = new MediaPlayer();
+
+       
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -59,10 +56,17 @@ namespace pomodoro3
                         //endCountdown(5, 0, false);
                         endCountdown(25, 0, true);
                     else {
-                        if (pomodoroCounter % 4 == 0 +1 && pomodoroCounter != 1)
+                        if (pomodoroCounter % 4 == 0 + 1 && pomodoroCounter != 1)
                             endCountdown(15, 0, false);
-                        else
+                        else {
                             endCountdown(5, 0, false);
+                            //SystemSounds.Beep.play();
+                            //SoundPlayer player = new SoundPlayer("Assets/finish.wav");
+                          
+                            
+                        }
+
+
                     }
                 }
                 else {
@@ -114,8 +118,14 @@ namespace pomodoro3
                 motivationText.Text = "Relax";
 
             motivationText.Visibility = Visibility.Visible;
+
+            //mediaElement media = new MediaElement();
+           // media.AutoPlay = false;
+            //media.LoadedBehavior = MediaState.Manual;
+            //media.Source = new Uri("Assets/finish.wav", UriKind.Relative);
+            //media.Play();
             
-            
+
         }
 
         private void pauseImg_Tapped(object sender, TappedRoutedEventArgs e) {
@@ -207,6 +217,15 @@ namespace pomodoro3
 
 
         }
+
+
+        //private void playSound(string path) {
+        //    System.Media.SoundPlayer player =
+        //        new System.Media.SoundPlayer();
+        //    player.SoundLocation = path;
+        //    player.Load();
+        //    player.Play();
+        //}
 
         private void newCategoryTextBox_TextChanged(object sender, TextChangedEventArgs e) {
           
