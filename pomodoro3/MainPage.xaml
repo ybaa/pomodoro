@@ -94,11 +94,11 @@
                  Visibility="Collapsed"/>
         <TextBlock x:Name="it_sYourTextBlock"
                    HorizontalAlignment="Center" 
-                   Margin="55,567,275,0" 
+                   Margin="55,567,257,0" 
                    TextWrapping="Wrap"
                    Text="It's your"
                    VerticalAlignment="Top"
-                   FontSize="20"/>
+                   FontSize="20" Width="88"/>
         <TextBlock x:Name="pomodoroTodayTextBlock" 
                    HorizontalAlignment="Center"
                    Margin="145.202,567,0,0" 
@@ -115,7 +115,7 @@
                    FontSize="30"
                    Foreground="#FF262626" 
                    Width="36"/>
-        
+
 
     </Grid>
 </Page>
