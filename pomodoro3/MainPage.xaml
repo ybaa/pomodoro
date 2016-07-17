@@ -21,8 +21,8 @@
         <Image x:Name="playImg" 
                HorizontalAlignment="Center" 
                Height="100" 
-               Margin="0,380,0,0" 
-               VerticalAlignment="Top"
+               Margin="0,250,0,0" 
+               VerticalAlignment="Center"
                Width="100"
                Source="Assets/play.png" Tapped="playImg_Tapped"/>
         <Image x:Name="pauseImg" 
@@ -41,7 +41,7 @@
                 <SolidColorBrush Color="#FF262626" Opacity="0.15999999642372131"/>
             </ProgressBar.Background>
         </ProgressBar>
-        <TextBlock x:Name="pomodoroTextBlock" HorizontalAlignment="Left" Margin="25,28,274,0" TextWrapping="Wrap" Text="Pomodoro" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock x:Name="pomodoroTextBlock" HorizontalAlignment="Left" Margin="25,28,0,0" TextWrapping="Wrap" Text="Pomodoro" VerticalAlignment="Top" FontSize="20" Width="160"/>
         <ProgressBar x:Name="myProgressBarLower"
         	         HorizontalAlignment="Center"
         	         Height="5"
@@ -98,28 +98,27 @@
                  Width="347" 
                  Visibility="Collapsed"/>
         <TextBlock x:Name="it_sYourTextBlock"
-                   HorizontalAlignment="Center" 
-                   Margin="48,567,244,0" 
+                   HorizontalAlignment="Left" 
+                   Margin="35,0,0,40" 
                    TextWrapping="Wrap"
                    Text="It's your"
-                   VerticalAlignment="Top"
-                   FontSize="20" Width="108"/>
+                   VerticalAlignment="Bottom"
+                   FontSize="20" Width="101"/>
         <TextBlock x:Name="pomodoroTodayTextBlock" 
-                   HorizontalAlignment="Center"
-                   Margin="194,567,50,0" 
+                   HorizontalAlignment="Right"
+                   Margin="0,0,40,40" 
                    TextWrapping="Wrap" 
                    Text="pomodoro today!" 
-                   VerticalAlignment="Top" 
+                   VerticalAlignment="Bottom" 
                    FontSize="20"/>
         <TextBlock x:Name="pomodoroTodayNumber" 
                    HorizontalAlignment="Center"
-                   Margin="155,561,209,43"
+                   Margin="0,0,60,40"
                    TextWrapping="Wrap" 
                    Text="1" 
-                   VerticalAlignment="Center" 
                    FontSize="30"
                    Foreground="#FF262626" 
-                   Width="36"/>
+                   Width="36" VerticalAlignment="Bottom" Height="29"/>
 
 
     </Grid>
