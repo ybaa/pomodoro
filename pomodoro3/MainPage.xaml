@@ -32,7 +32,7 @@
                VerticalAlignment="Top"
                Width="100"
                Source="Assets/pause.png" Visibility="Collapsed" Tapped="pauseImg_Tapped"/>
-        <ProgressBar x:Name="myProgressBar"
+        <ProgressBar x:Name="myProgressBarUpper"
                      HorizontalAlignment="Center"
                      Height="5" Margin="0,120,0,0"
                      VerticalAlignment="Top" Maximum="1500" Foreground="#FF51CB18" Width="350"
@@ -42,10 +42,14 @@
             </ProgressBar.Background>
         </ProgressBar>
         <TextBlock x:Name="pomodoroTextBlock" HorizontalAlignment="Left" Margin="25,28,274,0" TextWrapping="Wrap" Text="Pomodoro" VerticalAlignment="Top" FontSize="20"/>
-        <ProgressBar x:Name="myProgressBar_Copy"
-        	HorizontalAlignment="Center"
-        	Height="5" Margin="25,300,25,0"
-        	VerticalAlignment="Top" Maximum="1500" Foreground="#FF51CB18" Width="350"
+        <ProgressBar x:Name="myProgressBarLower"
+        	         HorizontalAlignment="Center"
+        	         Height="5"
+                     Margin="25,300,25,0"
+        	         VerticalAlignment="Top" 
+                     Maximum="1500" 
+                     Foreground="#FF51CB18"
+                     Width="350"
                      >
             <ProgressBar.Background>
                 <SolidColorBrush Color="#FF262626" Opacity="0.15999999642372131"/>
@@ -72,7 +76,9 @@
                   VerticalAlignment="Top"
                   Width="200"
                   FontSize="16" 
-                  PlaceholderText="category" SelectionChanged="categoryBox_SelectionChanged" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" 
+                  PlaceholderText="category"
+                  HorizontalContentAlignment="Center"
+                  BorderBrush="{x:Null}" 
                   
                   />
         <Button x:Name="addCategoryButton" 
@@ -90,25 +96,24 @@
                  Text="Enter category" 
                  VerticalAlignment="Top"
                  Width="347" 
-                 TextChanged="newCategoryTextBox_TextChanged"
                  Visibility="Collapsed"/>
         <TextBlock x:Name="it_sYourTextBlock"
                    HorizontalAlignment="Center" 
-                   Margin="55,567,257,0" 
+                   Margin="48,567,244,0" 
                    TextWrapping="Wrap"
                    Text="It's your"
                    VerticalAlignment="Top"
-                   FontSize="20" Width="88"/>
+                   FontSize="20" Width="108"/>
         <TextBlock x:Name="pomodoroTodayTextBlock" 
                    HorizontalAlignment="Center"
-                   Margin="145.202,567,0,0" 
+                   Margin="194,567,50,0" 
                    TextWrapping="Wrap" 
                    Text="pomodoro today!" 
                    VerticalAlignment="Top" 
                    FontSize="20"/>
         <TextBlock x:Name="pomodoroTodayNumber" 
                    HorizontalAlignment="Center"
-                   Margin="151,560,213,44"
+                   Margin="155,561,209,43"
                    TextWrapping="Wrap" 
                    Text="1" 
                    VerticalAlignment="Center" 

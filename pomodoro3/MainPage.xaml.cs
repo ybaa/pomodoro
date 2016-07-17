@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Author: Martyna Łagożna
+ * Created: 9.07.2016
+ * Last update: 17.07.2016
+ */
+
+using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,14 +24,12 @@ namespace pomodoro3 {
                
         private int currentSecond = 59;
         private int currentMinute = 24;
-        private int barCounter = 0;
-        private bool work = true;           //to check is it is break or work now
+        private bool work = true;                       //to check if it is break or work now
         private int maxValueOfBarForBreak = 297;        //length of progress bar
-        private int maxValueOfBarForWork = 1470;
-        private int maxValueOfBarForLongBreak = 890;
+        private int maxValueOfBarForWork = 1476;
+        private int maxValueOfBarForLongBreak = 885;
         private int pomodoroCounter = 1;
         
-
         private List<String> categories = new List<string>();
 
         //MediaPlayer player = new MediaPlayer();
@@ -41,48 +45,70 @@ namespace pomodoro3 {
             myTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);         //count seconds
             myTimer.Tick += MyTimer_Tick;
 
+            setMaximumForProgressBars(maxValueOfBarForWork);        //initial value for this program
         }
 
         private void MyTimer_Tick(object sender, object e) {
           
 
-
-            if (currentSecond < 10)         //display
+            //display the time
+            if (currentSecond < 10)
                 timeToEnd.Text = currentMinute.ToString() + ":0" + currentSecond.ToString();
             else
                 timeToEnd.Text = currentMinute.ToString() + ":" + currentSecond.ToString();
 
+
+            //increment progress bars
+            myProgressBarLower.Value++;
+            myProgressBarUpper.Value++;
+
+
+
             currentSecond--;
             if (currentSecond == 0) {
-                if(currentMinute == 0) {                              //end of counting down
+                if(currentMinute == 0) {                                                        //end of counting down
                     myTimer.Stop();
 
-                    if (work) {                                           //it was work so now it's time to break
+                    if (work) {                                                                 //it was work so now it's time to break
                         if (pomodoroCounter % 4 == 0 + 1 && pomodoroCounter != 1) {             //long break
                             setNewTime(14, 59, false, "15:00");
-                            setPlayAndPauseImages(Visibility.Visible, Visibility.Collapsed);
+                            setMaximumForProgressBars(maxValueOfBarForLongBreak);
                         }
-                        else {                                           //short break
+                        else {                                                                  //short break
                             setNewTime(4, 59, false, "5:00");
-                            setPlayAndPauseImages(Visibility.Visible, Visibility.Collapsed);
+                            setMaximumForProgressBars(maxValueOfBarForBreak);
                         }
+                            setPlayAndPauseImages(Visibility.Visible, Visibility.Collapsed);
+                            setProgressBarsToZero();
+                            it_sYourTextBlock.Text = "It'll be your";
+                            pomodoroCounter++;
+                            pomodoroTodayNumber.Text = pomodoroCounter.ToString();
                     }
-                    else {                                                //it was break, now it'll be worktime
+                    else {                                                                     //it was break, now it'll be worktime
                         setNewTime(24, 59, true, "25:00");
                         setPlayAndPauseImages(Visibility.Visible, Visibility.Collapsed);
+                        setMaximumForProgressBars(maxValueOfBarForWork);
+                        setProgressBarsToZero();
+                        it_sYourTextBlock.Text = "It's your";
                     }
                 }
                 else {
                     currentMinute--;
                     currentSecond = 59;
                 }
-
-
             }
-
-
-
         }
+
+        private void setProgressBarsToZero() {
+            myProgressBarUpper.Value = 0;
+            myProgressBarLower.Value = 0;
+        }
+
+        private void setMaximumForProgressBars(int max) {
+            myProgressBarUpper.Maximum = max;
+            myProgressBarLower.Maximum = max;
+        }
+
         private void setNewTime(int min, int sec, bool workStatus, string timeToShow) {
             currentMinute = min;
             currentSecond = sec;
@@ -121,43 +147,43 @@ namespace pomodoro3 {
            
         }
 
-        private void button_Click(object sender, RoutedEventArgs e) {       //skip button
+
+        //skip button
+        private void button_Click(object sender, RoutedEventArgs e) {      
             myTimer.Stop();
             setPlayAndPauseImages(Visibility.Visible, Visibility.Collapsed);
+            setProgressBarsToZero();
 
-            if (work) {     //if work set break now
+            if (work) {                                                    //if work set break now
                 if (pomodoroCounter % 4 != 0 + 1 || pomodoroCounter == 1) {
-                    setNewTime(4, 59, false, "5:00");       //set the time
-                    it_sYourTextBlock.Text = "It will be your";
-                    if (pomodoroCounter == 1)        //to avoid incorrect showing current number of pomodoros
+                    setNewTime(4, 59, false, "5:00");                      //set the time
+                    it_sYourTextBlock.Text = "It'll be your";
+                    if (pomodoroCounter == 1)                              //to avoid incorrect showing current number of pomodoros
                         pomodoroCounter++;
                     pomodoroTodayNumber.Text = pomodoroCounter.ToString();
+                    setMaximumForProgressBars(maxValueOfBarForBreak);
+
                 }
                 else {
                     setNewTime(14, 59, false, "15:00");
                     pomodoroTodayNumber.Text = pomodoroCounter.ToString();
-                    it_sYourTextBlock.Text = "It will be your";
+                    it_sYourTextBlock.Text = "It'll be your";
+                    setMaximumForProgressBars(maxValueOfBarForLongBreak);
                 }
                 pomodoroCounter++;
             }
             else {
                 setNewTime(24, 59, true, "25:00");
                 it_sYourTextBlock.Text = "It's your";
+                setMaximumForProgressBars(maxValueOfBarForWork);
             }
 
             
         }
 
 
-        private void categoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-        }
-        private void newCategoryTextBox_TextChanged(object sender, TextChangedEventArgs e) {
-
-        }
-
-
-        private void button_Click_1(object sender, RoutedEventArgs e) {         // add category button
+        // add category button
+        private void button_Click_1(object sender, RoutedEventArgs e) {     
 
             if (addCategoryButton.Content.ToString() != "Click to accept") {
                 newCategoryTextBox.Visibility = Visibility.Visible;
