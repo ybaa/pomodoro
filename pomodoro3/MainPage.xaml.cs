@@ -183,23 +183,23 @@ namespace pomodoro3 {
 
 
         // add category button
-        private void button_Click_1(object sender, RoutedEventArgs e) {     
+        //private void button_Click_1(object sender, RoutedEventArgs e) {     
 
-            if (addCategoryButton.Content.ToString() != "Click to accept") {
-                newCategoryTextBox.Visibility = Visibility.Visible;
-                addCategoryButton.Content = "Click to accept";
-            }
-            else {
-                addCategoryButton.Content = "Add category";
-                categories.Add(newCategoryTextBox.Text.ToString());
+        //    if (addCategoryButton.Content.ToString() != "Click to accept") {
+        //        newCategoryTextBox.Visibility = Visibility.Visible;
+        //        addCategoryButton.Content = "Click to accept";
+        //    }
+        //    else {
+        //        addCategoryButton.Content = "Add category";
+        //        categories.Add(newCategoryTextBox.Text.ToString());
 
-                categoryBox.Items.Add(categories[categories.Count-1]);
-                newCategoryTextBox.Visibility = Visibility.Collapsed;
+        //        categoryBox.Items.Add(categories[categories.Count-1]);
+        //        newCategoryTextBox.Visibility = Visibility.Collapsed;
                
-            }
+        //    }
 
 
-        }
+        //}
 
     }
 }
