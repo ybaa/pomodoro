@@ -68,7 +68,7 @@ namespace pomodoro3 {
             if (currentSecond == 0) {
                 if(currentMinute == 0) {                                                        //end of counting down
                     myTimer.Stop();
-
+                    mySound.Play();
                     if (work) {                                                                 //it was work so now it's time to break
                         if (pomodoroCounter % 4 == 0 + 1 && pomodoroCounter != 1) {             //long break
                             setNewTime(14, 59, false, "15:00");

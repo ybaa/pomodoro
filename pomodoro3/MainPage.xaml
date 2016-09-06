@@ -9,6 +9,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="myPlayer" Background="#FFD34747">
+        <MediaElement x:Name="mySound"
+                      Height="1"
+                      Width="1"
+                      Source="Assets/finish.wav"
+                      AutoPlay="False"
+            />
         <TextBlock x:Name="timeToEnd" 
                    HorizontalAlignment="Center"
                    Margin="0,160,0,0" 
