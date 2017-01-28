@@ -7,8 +7,8 @@
     <ProjectGuid>{35A2C7E1-6C79-479D-8342-4F233631FA79}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>pomodoro3</RootNamespace>
-    <AssemblyName>pomodoro3</AssemblyName>
+    <RootNamespace>pomodoro</RootNamespace>
+    <AssemblyName>pomodoro</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
